@@ -9,13 +9,19 @@ import tweepy
 auth = tweepy.OAuthHandler(consumer_key,consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
+try:
+    api.verify_credentials()
+    print("Authentication ok")
+except:
+    print("Error during authentication")
 
 #public_tweets = api.home_timeline()
 
 #for tweet in public_tweets
 #print("weet.text","\n")
-name = "LunarCRUSH"
+name = "Replying to @RAM_Maroc"
+#"LunarCRiSH"
 tweet_id=""
-tweets=tweepy.Cursor(api.search, q='to:' + name , result_type='recent', timeout=999999).items(100)
+tweets=tweepy.Cursor(api.search, q='to:' + name , result_type='recent', timeout=999999).items(1)
 for tweet in tweets:
-    print(tweet)
+    print(tweet.text,"\n")
