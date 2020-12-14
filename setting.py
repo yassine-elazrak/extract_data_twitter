@@ -34,11 +34,11 @@ name = "@RAM_Maroc"
 # if not t:
 #     for i in t:
 #         print(i)
-
-# api.search(q=name, rpp=10):
+# tweets =  tweepy.Cursor(api.search,q='to:'+name).items(100)
+tweets=api.search(q=name, count=222)
 #------
-# for tweet in tweepy.Cursor(api.search,q='to:'+name, result_type='recent', timeout=999999).items(100):
-#     print(f"{tweet.created_at}   -- id is ->{tweet.in_reply_to_status_id_str} ==>{tweet.user.name} ===: {tweet.text}\n\n")
+for tweet in tweets:
+     print(f"{tweet.created_at}   -- id is ->{tweet.in_reply_to_status_id_str} ==>{tweet.user.name} ===: {tweet.text}\n\n")
   
 # import tweepy, datetime, time
 
@@ -91,15 +91,13 @@ name = "@RAM_Maroc"
 #         csv_writer.writerow(row)
 
 ##https://stackoverflow.com/questions/52307443/how-to-get-the-replies-for-a-given-tweet-with-tweepy-and-python
-import sys
-replies=[]
-non_bmp_map = dict.fromkeys(range(0x10000, sys.maxunicode + 1), 0xfffd)
-for full_tweets in tweepy.Cursor(api.user_timeline,screen_name=name,timeout=999999).items(10):
-  for tweet in tweepy.Cursor(api.search,q='to:'+name,result_type='recent',timeout=999999).items(1000):
-    if hasattr(tweet, 'in_reply_to_status_id_str'):
-      if (tweet.in_reply_to_status_id_str==full_tweets.id_str):
-        replies.append(tweet.text)
-  print("Tweet :",full_tweets.text.translate(non_bmp_map))
-  for elements in replies:
-       print("Replies :",elements)
-  replies.clear()
+#import sys
+#replies=[]
+#for tweet in tweepy.Cursor(api.search,q='to:'+name,result_type='recent',timeout=999999).items(1000):
+    #if hasattr(tweet, 'in_reply_to_status_id_str'):
+    #  if (tweet.in_reply_to_status_id_str==full_tweets.id_str):
+#   replies.append(tweet.text)
+#print("\n\nTweet :",full_tweets.text.translate(non_bmp_map),"\n\n")
+#for elements in replies:
+ #   print("\nReplies :=>> ", elements)
+#replies.clear()
