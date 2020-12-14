@@ -19,7 +19,7 @@ except:
 
 #for tweet in public_tweets
 #print("weet.text","\n")
-name = "Replying to @RAM_Maroc"
+name = "@RAM_Maroc"
 #"LunarCRiSH"
 tweet_id=""
 tweets=tweepy.Cursor(api.search, q='to:' + name , result_type='recent', timeout=999999).items(1)
