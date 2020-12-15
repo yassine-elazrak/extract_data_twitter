@@ -1,3 +1,16 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    setting.py                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: yelazrak <yelazrak@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/12/15 14:04:50 by yelazrak          #+#    #+#              #
+#    Updated: 2020/12/15 14:04:53 by yelazrak         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+
 import tweepy
 import datetime
 import time
@@ -16,7 +29,7 @@ csv_file = "replies_tweets.csv"
 # tweets=api.search(q=name, count=1000)
 
 
-def get_tweets(api, name):
+def get_all_replies(api, name):
     try:
         tweets = tweepy.Cursor(api.search, name).items(10000)
         with open(csv_file, 'w') as fd:
@@ -40,7 +53,7 @@ def main():
         print("Authentication ok")
     except:
         print("Error during authentication")
-        get_tweets(api, "@RAM_Maroc")
+    get_all_replies(api, "@RAM_Maroc")
 
 
 if __name__ == "__main__":
