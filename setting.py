@@ -31,12 +31,17 @@ csv_file = "replies_tweets.csv"
 
 def get_all_replies(api, name):
     try:
-        tweets = tweepy.Cursor(api.search, name).items(10000)
-        with open(csv_file, 'w') as fd:
+        with open(csv_file, 'a+') as fd:
             writer = csv.DictWriter(fd, fieldnames=csv_columns)
             writer.writeheader()
-            for tweet in tweets:
-                if (datetime.datetime.now() - tweet.created_at).days <= 1:
+            while True:
+                # tweets = tweepy.Cursor(api.search,
+                #            q=name,
+                #            since="2020-12-11",
+                #            until="2020-12-").items()
+                tweets = tweepy.Cursor(api.search, name).items()
+                for tweet in tweets:
+                # if (datetime.datetime.now() - tweet.created_at).days <= 1:
                     row = {'date_creat': tweet.created_at, 'user': tweet.user.screen_name,
                            'reply': str(tweet.text).replace('\n', ' ')}
                     writer.writerow(row)
